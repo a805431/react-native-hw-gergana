@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import SingleDie from '../components/SingleDie';
 import RollButton from '../components/RollButton';
+import TotalPointsContext from '../context/TotalPointsContext';
 
 const RollScreen = () => {
+  const { data, addUpPoints } = useContext(TotalPointsContext);
+
   return (
     <View style={{ flex: 1, backgroundColor: 'black' }}>
       <View style={styles.totalResultViewStyle}>
-        <Text style={styles.totalResultText}>Total: {24}</Text>
+        <Text style={styles.totalResultText}>Total: {data}</Text>
       </View>
       <View style={styles.diceContainerStyle}>
         <SingleDie rolledNumber={6} />
@@ -15,7 +18,7 @@ const RollScreen = () => {
         <SingleDie rolledNumber={6} />
         <SingleDie rolledNumber={6} />
       </View>
-      <RollButton />
+      <RollButton pressAction={addUpPoints}/>
     </View>
   );
 };
